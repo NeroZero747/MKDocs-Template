@@ -1,0 +1,278 @@
+/* =============================================================================
+   overrides.css — advanced polish for MkDocs Material
+   (safe to paste over your current overrides.css)
+   ========================================================================== */
+
+/* --- Original: page fade-in ------------------------------------------------ */
+.md-main__inner {
+  animation: fadeIn 0.22s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-main__inner { animation: none; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Original: small spacing on card buttons */
+.grid.cards .md-button { margin-top: 0.5rem; }
+
+/* Original: image helpers */
+.img-rounded { border-radius: 0.75rem; }
+.img-shadow  { box-shadow: var(--card-shadow); }
+
+/* =============================================================================
+   1) Smooth theme & accent transitions (light ↔ dark, accent hover)
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  /* Transition container colors when toggling theme */
+  [data-md-color-scheme] {
+    transition:
+      background-color .30s ease,
+      color .30s ease;
+  }
+
+  /* Smoothly animate common accent-using properties */
+  a, .md-button, button, input, select, textarea,
+  .admonition, .md-header, .md-nav, .md-sidebar, .toc {
+    transition:
+      color .20s ease,
+      background-color .20s ease,
+      border-color .20s ease,
+      box-shadow .20s ease,
+      filter .20s ease;
+  }
+}
+
+/* =============================================================================
+   2) Subtle scroll shadows (adds depth when content scrolls)
+   ========================================================================== */
+.md-header, .md-sidebar { transition: box-shadow .2s ease; }
+
+/* Progressive enhancement: auto-apply shallow shadow shortly after top */
+@supports (animation-timeline: scroll()) {
+  .md-header {
+    animation: headerShadow linear both;
+    animation-timeline: scroll(root);
+  }
+  @keyframes headerShadow {
+    0%   { box-shadow: none; }
+    4%   { box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+    100% { box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+  }
+}
+
+/* Fallback: if you later toggle a .scrolled class via tiny JS, it will work too */
+.md-header.scrolled, .md-sidebar.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+
+/* =============================================================================
+   3) Link & button hover feedback
+   ========================================================================== */
+a:hover,
+.md-button:hover {
+  text-decoration: none;
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.md-button:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+/* =============================================================================
+   4) Code blocks as cards
+   ========================================================================== */
+pre code {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* =============================================================================
+   5) Admonitions (callouts) with gentle elevation
+   ========================================================================== */
+.admonition {
+  border-radius: .75rem;
+  box-shadow: var(--card-shadow);
+}
+.admonition:hover {
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+}
+
+/* =============================================================================
+   6) Accent gradient header (optional, looks premium)
+   Comment out if you prefer the stock header color.
+   ========================================================================== */
+.md-header {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--md-primary-fg-color) 80%, transparent),
+    color-mix(in oklab, var(--md-accent-fg-color) 70%, transparent)
+  );
+}
+[data-md-color-scheme="slate"] .md-header {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--md-primary-fg-color) 40%, transparent),
+    color-mix(in oklab, var(--md-accent-fg-color) 40%, transparent)
+  );
+}
+
+/* =============================================================================
+   7) Card hover lift (for grid.cards)
+   ========================================================================== */
+.grid.cards > * {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.grid.cards > *:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* =============================================================================
+   8) Soft focus outline (accessible + pretty)
+   ========================================================================== */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--md-accent-fg-color) 40%, transparent);
+  border-radius: 6px;
+}
+
+/* =============================================================================
+   9) Dark-mode image dim (keeps contrast)
+   ========================================================================== */
+[data-md-color-scheme="slate"] img,
+[data-md-color-scheme="slate"] .img-shadow {
+  filter: brightness(0.85);
+}
+
+/* =============================================================================
+   10) Smooth anchor scrolling
+   ========================================================================== */
+html { scroll-behavior: smooth; }
+
+/* =============================================================================
+   11) Frosted panel utility
+   ========================================================================== */
+.frosted {
+  background: color-mix(in oklab, var(--md-default-bg-color) 75%, transparent);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid color-mix(in oklab, var(--md-default-fg-color) 12%, transparent);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+  padding: 1rem;
+}
+
+/* =============================================================================
+   12) Optional: highlight active item in the page TOC a bit more
+   ========================================================================== */
+.md-nav--secondary .md-nav__link--active {
+  font-weight: 700;
+  color: var(--md-accent-fg-color);
+}
+
+/* =============================================================================
+   13) Optional: nicer inline code
+   ========================================================================== */
+code:not(pre code) {
+  border-radius: .35rem;
+  padding: .05rem .35rem;
+  background: color-mix(in oklab, var(--md-code-bg-color) 85%, transparent);
+  border: 1px solid color-mix(in oklab, var(--md-default-fg-color) 14%, transparent);
+}
+
+/* =============================================================================
+   14) Optional: tables in content get tiny row separators (keeps density)
+   ========================================================================== */
+.md-typeset table:not(.table) td,
+.md-typeset table:not(.table) th {
+  border-bottom: 1px solid color-mix(in oklab, var(--md-default-fg-color) 10%, transparent);
+}
+
+/* === Back-to-top button === */
+.back-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 100;
+  width: 42px; height: 42px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--md-default-fg-color) 16%, transparent);
+  background: color-mix(in oklab, var(--md-default-bg-color) 92%, transparent);
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  display: grid; place-items: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.back-to-top.show { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { transform: translateY(-2px); }
+
+/* === Heading copy buttons === */
+.copy-link {
+  margin-left: .5rem;
+  font: inherit;
+  font-size: .9em;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: .5rem;
+  opacity: 0; /* show on hover */
+  cursor: pointer;
+  transition: opacity .15s ease, transform .15s ease, border-color .15s ease;
+}
+h1:hover > .copy-link,
+h2:hover > .copy-link,
+h3:hover > .copy-link,
+h4:hover > .copy-link { opacity: .9; }
+.copy-link:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--md-default-fg-color) 20%, transparent);
+}
+.copy-link.copied {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--md-accent-fg-color) 35%, transparent);
+}
+
+/* === Image lightbox (dialog) === */
+.img-lightbox::backdrop {
+  background: rgba(0,0,0,.5);
+}
+.img-lightbox {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+.img-lightbox img {
+  display: block;
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: .75rem;
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+.img-lightbox .lb-caption {
+  margin-top: .5rem;
+  text-align: center;
+  opacity: .9;
+}
+.img-lightbox .lb-close {
+  position: absolute;
+  right: -12px; top: -12px;
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: color-mix(in oklab, var(--md-default-bg-color) 92%, transparent);
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  cursor: pointer;
+}
+
+/* Optional: nicer look for .zoomable images */
+img.zoomable {
+  cursor: zoom-in;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+img.zoomable:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.15);
+}
+

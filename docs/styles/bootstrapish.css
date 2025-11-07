@@ -1,0 +1,610 @@
+:root {
+  --bs-primary: #4f46e5;
+  --bs-secondary: #64748b;
+  --bs-success: #16a34a;
+  --bs-warning: #eab308;
+  --bs-danger: #dc2626;
+  --card-radius: 1rem;
+  --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  --transition-fast: 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+[data-md-color-scheme="slate"] {
+  --bs-light: #0b1020;
+  --bs-dark: #e5e7eb;
+}
+
+/* Cards polish */
+.grid.cards > * {
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+.grid.cards > *:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-success {
+  background: color-mix(in oklab, var(--bs-success) 15%, transparent);
+  color: var(--bs-success);
+}
+.badge-warning {
+  background: color-mix(in oklab, var(--bs-warning) 20%, transparent);
+  color: #a16207;
+}
+.badge-danger {
+  background: color-mix(in oklab, var(--bs-danger) 15%, transparent);
+  color: var(--bs-danger);
+}
+
+/* KPI */
+.kpis > * {
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: var(--md-code-bg-color);
+  box-shadow: var(--card-shadow);
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.table thead th,
+.table tbody td {
+  padding: 0.6rem 0.75rem;
+}
+.table thead th {
+  border-bottom: 1px solid var(--md-default-fg-color--light);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--md-code-bg-color) 70%, transparent),
+    transparent
+  );
+  font-weight: 700;
+}
+.table tbody td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.table-striped tbody tr:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.02);
+}
+[data-md-color-scheme="slate"] .table-striped tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.03);
+}
+.table-hover tbody tr {
+  transition: background var(--transition-fast);
+}
+.table-hover tbody tr:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+[data-md-color-scheme="slate"] .table-hover tbody tr:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.table-rounded {
+  border-radius: 0.9rem;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+/* Minimal toolbar */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+.table-search {
+  width: 100%;
+  max-width: 22rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--md-default-fg-color--light);
+  border-radius: 0.5rem;
+  background: var(--md-code-bg-color);
+}
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.pager-btn,
+.pager-select {
+  font: inherit;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--md-default-fg-color--light);
+  background: var(--md-code-bg-color);
+  cursor: pointer;
+}
+.pager-info {
+  font-size: 0.82rem;
+  opacity: 0.8;
+}
+
+/* Header-integrated filter caret */
+.th-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  position: relative;
+  cursor: pointer;
+}
+.th-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.th-caret {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  user-select: none;
+}
+.th-inner:hover .th-caret {
+  opacity: 1;
+}
+
+.dd-panel {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  min-width: 14rem;
+  max-height: 16rem;
+  overflow: auto;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  background: var(--md-default-bg-color);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--md-default-fg-color--light);
+  display: none;
+}
+.dd-panel.open {
+  display: block;
+}
+.dd-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.dd-action {
+  font: inherit;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--md-default-fg-color--light);
+  background: var(--md-code-bg-color);
+  cursor: pointer;
+}
+.dd-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+}
+.dd-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.dd-item input {
+  accent-color: var(--md-accent-fg-color);
+}
+
+/* Sorting icons */
+th.sortable {
+  position: relative;
+}
+th.sorted-asc::after,
+th.sorted-desc::after {
+  position: absolute;
+  right: 0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+th.sorted-asc::after {
+  content: "▲";
+}
+th.sorted-desc::after {
+  content: "▼";
+}
+
+/* Namespace wrapper so styles don't leak */
+.ui-cards {
+  --radius: 16px;
+  --border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 12%, transparent);
+}
+.ui-cards .toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px;
+  border: var(--border);
+  border-radius: calc(var(--radius) + 6px);
+  background: color-mix(in oklab, var(--md-default-bg-color) 92%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--md-shadow-z2);
+}
+.ui-cards .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.ui-cards .logo {
+  inline-size: 32px;
+  block-size: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    var(--md-accent-fg-color),
+    color-mix(in oklab, var(--md-primary-fg-color) 70%, transparent)
+  );
+  color: white;
+  font-weight: 800;
+  box-shadow: var(--md-shadow-z3);
+}
+.ui-cards .actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.ui-cards .btn {
+  --_bg: var(--md-default-bg-color);
+  --_fg: var(--md-default-fg-color);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: var(--border);
+  background: var(--_bg);
+  color: var(--_fg);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  box-shadow: var(--md-shadow-z1);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+.ui-cards .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--md-shadow-z3);
+}
+.ui-cards .btn:focus-visible {
+  outline: none;
+  box-shadow: var(--md-shadow-z3),
+    0 0 0 3px color-mix(in oklab, var(--md-accent-fg-color) 35%, transparent);
+}
+.ui-cards .btn.primary {
+  background: linear-gradient(
+    135deg,
+    var(--md-primary-fg-color),
+    var(--md-accent-fg-color)
+  );
+  color: #fff;
+  border-color: transparent;
+}
+
+.ui-cards .grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.ui-cards .card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--md-default-bg-color);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--md-shadow-z2);
+  overflow: clip;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+.ui-cards .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--md-shadow-z4);
+  border-color: color-mix(in oklab, var(--md-accent-fg-color) 28%, transparent);
+}
+.ui-cards .media {
+  aspect-ratio: 16/9;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--md-primary-fg-color) 30%, transparent),
+    color-mix(in oklab, var(--md-accent-fg-color) 30%, transparent)
+  );
+}
+.ui-cards .content {
+  padding: 14px 14px 6px;
+  display: grid;
+  gap: 10px;
+}
+.ui-cards .title {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  font-size: 1.05rem;
+}
+.ui-cards .sub {
+  opacity: 0.85;
+}
+.ui-cards .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ui-cards .chip {
+  padding: 6px 10px;
+  border: var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  opacity: 0.9;
+  background: color-mix(in oklab, var(--md-accent-fg-color) 10%, transparent);
+}
+.ui-cards .actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px 14px;
+  border-top: var(--border);
+  background: color-mix(in oklab, var(--md-default-bg-color) 94%, transparent);
+}
+.ui-cards .btn.icon {
+  padding: 8px 10px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ui-cards .btn.icon svg {
+  inline-size: 18px;
+  block-size: 18px;
+}
+.ui-cards .btn.icon[aria-pressed="true"] {
+  outline: none;
+  box-shadow: 0 0 0 3px
+    color-mix(in oklab, var(--md-accent-fg-color) 35%, transparent);
+}
+.ui-cards .price {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+.ui-cards .progress {
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--md-default-fg-color) 8%, transparent);
+  overflow: hidden;
+  border: var(--border);
+}
+.ui-cards .progress > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--md-primary-fg-color),
+    var(--md-accent-fg-color)
+  );
+  width: var(--val, 42%);
+}
+
+/* Compact density modifier */
+html.compact .ui-cards {
+  --radius: 12px;
+}
+html.compact .ui-cards .btn {
+  padding: 7px 10px;
+  border-radius: 10px;
+}
+html.compact .ui-cards .content {
+  padding: 12px 12px 6px;
+}
+html.compact .ui-cards .actions-row {
+  padding: 8px 10px 12px;
+}
+
+/* Left-align header + cells (and center vertically) */
+.table thead th,
+.table tbody td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Keep header widgets left-aligned with label */
+.th-inner { justify-content: flex-start; }
+.th-caret { margin-left: .15rem; }
+
+/* Bottom pagination container */
+.table-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+  margin: .5rem 0 0;  /* space above footer */
+}
+.table-footer .pager { display: flex; align-items: center; gap: .35rem; }
+.table-footer .pager-btn,
+.table-footer .pager-select {
+  font: inherit;
+  padding: .3rem .5rem;
+  border-radius: .45rem;
+  border: 1px solid var(--md-default-fg-color--light);
+  background: var(--md-code-bg-color);
+  cursor: pointer;
+}
+.table-footer .pager-info { font-size: .82rem; opacity: .8; }
+
+/* Make sure any top toolbar/search is hidden if it exists */
+.table-toolbar, .table-search { display: none !important; }
+
+/* Footer: clear-left, pager-right */
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* left: Clear filters | right: pager */
+  gap: .5rem;
+  margin: .5rem 0 0;
+}
+.table-footer .footer-left { display: flex; align-items: center; gap: .5rem; }
+
+/* Footer layout: Clear (left) | Pager (right) */
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  margin: .5rem 0 0;
+}
+.table-footer .footer-left { display: flex; align-items: center; gap: .5rem; }
+
+/* Invisible filler rows that keep height stable */
+tr.tr-filler td {
+  visibility: hidden;     /* take up space, not visible */
+  padding: 0 !important;
+  border: 0 !important;   /* no borders/stripes on fillers */
+}
+
+/* Keep table height stable with min-height */
+.table tbody {
+  transition: min-height 0.2s ease;
+}
+
+/* Footer: clear (left) | pager (right) */
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  margin: .5rem 0 0;
+}
+.table-footer .footer-left { display: flex; align-items: center; gap: .5rem; }
+
+/* --- Sticky footer (always visible) ---
+.table-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  background: color-mix(in oklab, var(--md-default-bg-color) 94%, transparent);
+  backdrop-filter: blur(6px);
+  padding: 0.4rem 0.6rem;
+  border-top: 1px solid var(--md-default-fg-color--light);
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+} */
+
+/* Match light/dark modes smoothly
+[data-md-color-scheme="slate"] .table-footer {
+  background: color-mix(in oklab, var(--md-default-bg-color) 98%, transparent);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+} */
+
+/* Ensure spacing below the footer if followed by other content
+.table-footer + * {
+  margin-top: 0.75rem;
+} */
+
+/* --- Accordion (Bootstrap-like) --- */
+.accordion details {
+  border: 1px solid color-mix(in oklab, var(--md-default-fg-color) 12%, transparent);
+  border-radius: .75rem;
+  background: var(--md-default-bg-color);
+  box-shadow: var(--card-shadow);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  margin: .5rem 0;
+  overflow: clip;
+}
+
+.accordion details[open] {
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  border-color: color-mix(in oklab, var(--md-accent-fg-color) 26%, transparent);
+}
+
+.accordion summary {
+  list-style: none;           /* hide default marker */
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .75rem 1rem;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: .2px;
+  position: relative;
+}
+
+/* Remove native marker (Safari/WebKit) */
+.accordion summary::-webkit-details-marker { display: none; }
+
+/* Chevron */
+.accordion summary::after {
+  content: "▾";
+  margin-left: auto;
+  opacity: .7;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+.accordion details[open] > summary::after {
+  transform: rotate(-180deg);
+  opacity: 1;
+}
+
+/* Body */
+.accordion .accordion-body {
+  padding: .75rem 1rem 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--md-default-fg-color) 12%, transparent);
+}
+
+/* Optional tone variants (like Bootstrap "flush") */
+.accordion.flush details {
+  border-radius: .5rem;
+  box-shadow: none;
+}
+
+/* Dark mode tweaks */
+[data-md-color-scheme="slate"] .accordion details {
+  border-color: rgba(255,255,255,.12);
+}
+[data-md-color-scheme="slate"] .accordion .accordion-body {
+  border-top-color: rgba(255,255,255,.12);
+}
+
+
+.accordion details.info[open] {
+  border-color: var(--bs-primary);
+  background: color-mix(in oklab, var(--bs-primary) 8%, transparent);
+}
+.accordion details.success[open] {
+  border-color: var(--bs-success);
+  background: color-mix(in oklab, var(--bs-success) 8%, transparent);
+}
+.accordion details.warning[open] {
+  border-color: var(--bs-warning);
+  background: color-mix(in oklab, var(--bs-warning) 10%, transparent);
+}
+.accordion details.danger[open] {
+  border-color: var(--bs-danger);
+  background: color-mix(in oklab, var(--bs-danger) 10%, transparent);
+}
+
+.accordion details > .accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.accordion details[open] > .accordion-body {
+  max-height: 1000px; /* large enough for tall content */
+  opacity: 1;
+}
+

@@ -1,0 +1,95 @@
+site_name: Pro Docs
+site_url: https://example.com
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/file-document-multiple
+  favicon: images/favicon.png
+  features:
+    - navigation.path
+    - navigation.top
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.indexes
+    - navigation.footer    
+    - content.code.copy
+    - content.code.annotate    
+    - content.tabs.link
+    - content.action.edit
+    - content.tooltips    
+    - toc.follow
+    - toc.integrate    
+    - header.autohide
+    - search.suggest
+    - search.highlight
+    - search.share    
+    - announce.dismiss
+  palette:
+    - scheme: default
+      primary: blue grey
+      accent: blue grey
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue grey
+      accent: blue grey
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - sane_lists
+  - tables
+  - abbr
+  - smarty  
+  - toc:
+      permalink: true
+      toc_depth: 3      
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.critic
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.keys
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+plugins:
+  - search
+  - mermaid2
+  - tags
+extra_css:
+  - styles/bootstrapish.css
+  - styles/overrides.css
+extra_javascript:
+  - javascripts/mermaid.js
+  - javascripts/tables.js
+  - javascripts/card.js
+  - javascripts/accordion.js
+  - javascripts/ui-enhancements.js
+  - javascripts/collapse.js
+nav:
+  - Home: index.md
+  - Components: components.md
+  - Layouts: layouts.md
+  - Mermaid: mermaid.md
